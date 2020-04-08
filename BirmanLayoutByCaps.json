@@ -1,0 +1,78 @@
+{
+  "title": "#Birman Layout",
+  "rules": [{
+    "description": "Caps×1 to en, Caps×2 to ru",
+    "manipulators": [
+        {
+            "conditions": [
+                {
+                    "name": "caps_lock pressed",
+                    "type": "variable_if",
+                    "value": 1
+                }
+            ],
+            "from": {
+                "key_code": "caps_lock",
+                "modifiers": {
+                    "optional": [
+                        "any"
+                    ]
+                }
+            },
+            "to_if_alone": [
+                {
+                    "select_input_source": {
+                        "input_source_id": "org.sil.ukelele.keyboardlayout.t.russian-ilyabirmantypography"
+                    }
+                }
+            ],
+            "type": "basic"
+        },
+        {
+            "from": {
+                "key_code": "caps_lock",
+                "modifiers": {
+                    "optional": [
+                        "any"
+                    ]
+                }
+            }, 
+            "to_delayed_action": {
+                "to_if_canceled": [
+                    {
+                        "set_variable": {
+                            "name": "caps_lock pressed",
+                            "value": 0
+                        }
+                    }
+                ],
+                "to_if_invoked": [
+                    {
+                        "set_variable": {
+                            "name": "caps_lock pressed",
+                            "value": 0
+                        }
+                    }
+                ]
+            },
+            "to_if_alone": [
+                {
+                    "select_input_source": {
+                        "input_source_id": "org.sil.ukelele.keyboardlayout.t.english-ilyabirmantypography"
+                    }
+                },
+                {
+                    "set_variable": {
+                        "name": "caps_lock pressed",
+                        "value": 1
+                    }
+                },
+                {
+                    "key_code": "caps_lock"
+                }
+            ],
+            "type": "basic"
+        }
+    ]
+}]
+}
